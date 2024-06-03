@@ -30,7 +30,7 @@ export default function Nav() {
                         <span className="font-bold lg:block hidden">
                             {index.toString().padStart(2, "0")}
                         </span>
-                        <span className="font-thin md:text-sm lg:text-xl">{` ${item.name}`}</span>
+                        <span className="font-thin lg:text-xl">{` ${item.name}`}</span>
                     </NavLink>
                 ))}
             </nav>

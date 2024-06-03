@@ -75,14 +75,17 @@ export default function Destination() {
             initial={{ opacity: 0 }}
             animate={{ opacity: "100%" }}
             exit={{ opacity: 0 }}
-            className={`absolute top-0 left-0 w-screen h-fit min-h-screen bg-cover flex box-border 
+            className={`absolute top-0 left-0 w-full h-fit min-h-screen bg-cover flex box-border  overflow-x-hidden 
             lg:bg-[url('/assets/destination/background-destination-desktop.jpg')] 
             md:bg-[url('/assets/destination/background-destination-tablet.jpg')] 
             bg-[url('/assets/destination/background-destination-mobile.jpg')] 
-            lg:p-36 lg:pb-12 lg:flex-col lg:justify-center 
+            lg:p-36 lg:pt-48 lg:pb-12 flex-col lg:justify-start items-center 
+            px-8 md:py-52 py-36
             `}
         >
-            <h3 className="flex items-center gap-4 pb-12">
+            <h3
+                className={`flex items-center gap-4 lg:pt-4 pb-8 w-full lg:text-left px-4 flex-row lg:justify-start justify-center`}
+            >
                 <span className="text-2xl tracking-tighter text-neutral-600 font-bold">
                     01
                 </span>
@@ -120,14 +123,16 @@ function DestinationSection(props: {
     };
 }) {
     return (
-        <div className="flex items-center justify-center gap-[10vw]">
+        <div className={`flex items-center justify-center lg:gap-[10vw] lg:w-fit 
+                        lg:flex-row flex-col text-xl leading-8 md:w-[50vw] w-4/5 gap-16 lg:pt-0 pt-12
+        `}>
             <img
                 src={props.image}
                 alt="moon image"
                 className="lg:w-[50vh] aspect-square"
             />
             <div className="flex flex-col lg:w-[50vh] h-fit">
-                <div className="flex gap-12 items-center w-full text-neutral-400 py-4">
+                <div className="flex gap-12 items-center w-full text-neutral-400 py-4 lg:justify-start justify-center">
                     {destinationPages.map((item, index) => {
                         const path = index === 0 ? "" : item.name;
                         return (
@@ -141,14 +146,14 @@ function DestinationSection(props: {
                         );
                     })}
                 </div>
-                <h2 className="text-[5rem] font-rosarivo text-white">
+                <h2 className="text-[5rem] font-rosarivo text-white py-10 lg:text-left text-center">
                     {props.name.toUpperCase()}
                 </h2>
-                <p className="text-neutral-500 font-barlow text-lg leading-8">
+                <p className="text-neutral-500 font-barlow text-lg leading-8 lg:text-left text-center">
                     {props.description}
                 </p>
                 <div className="w-full p-8 border-b-2 border-neutral-800"></div>
-                <div className="py-4 flex gap-16 items-center">
+                <div className="py-4 flex gap-16 items-center lg:justify-start justify-between lg:px-0 px-12">
                     <div className="flex flex-col gap-2 py-2">
                         <span className="text-neutral-500 text-xs">
                             AVG. DISTANCE
