@@ -6,12 +6,12 @@ import { AnimatePresence } from "framer-motion";
 export default function App() {
     const location = useLocation();
     return (
-        <div className="w-screen h-screen bg-black flex flex-col">
+        <div className="w-full h-screen bg-black flex flex-col overflow-x-hidden">
             <Nav />
             <AnimatePresence>
                 <Routes location={location} key={location.pathname}>
                     {route.map((item) => (
-                        <Route path={item.path} element={item.element()} />
+                        <Route path={`${item.path}/*`} element={item.element()} key={item.path} />
                     ))}
                 </Routes>
             </AnimatePresence>
