@@ -1,7 +1,7 @@
 import Crew from "./components/crew/Crew"
 import Destination from "./components/destination/Destination"
 import Home from "./components/home/Home"
-import Technology from "./components/technology/technology"
+import Technology from "./components/technology/Technology"
 
 export const route = [{
     path: "/",

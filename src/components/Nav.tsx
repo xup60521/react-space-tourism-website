@@ -17,7 +17,7 @@ export default function Nav() {
                 {route.map((item, index) => (
                     <NavLink
                         to={item.path}
-                        key={item.path}
+                        key={`nav ${item.path}`}
                         unstable_viewTransition
                         className={(c) => {
                             let className =

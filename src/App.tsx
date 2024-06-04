@@ -10,8 +10,8 @@ export default function App() {
             <Nav />
             <AnimatePresence>
                 <Routes location={location} key={location.pathname}>
-                    {route.map((item) => (
-                        <Route path={`${item.path}/*`} element={item.element()} key={item.path} />
+                    {route.map((item, index) => (
+                        <Route path={`${item.path}/*`} element={item.element()} key={`top route ${item.path} ${index}`} />
                     ))}
                 </Routes>
             </AnimatePresence>

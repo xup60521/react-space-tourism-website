@@ -3,7 +3,7 @@ import MoonPNG from "/assets/destination/image-moon.png";
 import MarsPNG from "/assets/destination/image-mars.png";
 import EuropaPNG from "/assets/destination/image-europa.png";
 import TitanPNG from "/assets/destination/image-titan.png";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 
 const destinationPages = [
     {
@@ -122,23 +122,42 @@ function DestinationSection(props: {
         unit: string;
     };
 }) {
+    const location = useLocation();
     return (
-        <div className={`flex items-center justify-center lg:gap-[10vw] lg:w-fit 
+        <div
+            className={`flex items-center justify-center lg:gap-[10vw] lg:w-fit 
                         lg:flex-row flex-col text-xl leading-8 md:w-[50vw] w-4/5 gap-16 lg:pt-0 pt-12
-        `}>
+        `}
+        >
             <img
                 src={props.image}
                 alt="moon image"
                 className="lg:w-[50vh] aspect-square"
             />
             <div className="flex flex-col lg:w-[50vh] h-fit">
-                <div className="flex gap-12 items-center w-full text-neutral-400 py-4 lg:justify-start justify-center">
+                <div className="flex gap-12 items-center w-full py-4 lg:justify-start justify-center">
                     {destinationPages.map((item, index) => {
                         const path = index === 0 ? "" : item.name;
                         return (
                             <NavLink
                                 to={`/destination/${path}`}
-                                className={"text-lg font-barlow font-light"}
+                                className={(c) => {
+                                    if (path === "") {
+                                        if (
+                                            location.pathname ===
+                                                "/destination" ||
+                                            location.pathname ===
+                                                "/destination/"
+                                        ) {
+                                            return "text-lg font-barlow font-semibold text-white";
+                                        }
+                                        return "text-lg font-barlow font-light text-neutral-400 ";
+                                    }
+                                    if (c.isActive) {
+                                        return "text-lg font-barlow font-semibold text-white";
+                                    }
+                                    return "text-lg font-barlow font-light text-neutral-400 ";
+                                }}
                                 key={`destination navlink ${path}`}
                             >
                                 {item.name.toUpperCase()}
