@@ -21,7 +21,7 @@ export default function Home() {
                 <h1 className="text-white font-rosarivo text-[9rem] tracking-wide">
                     SPACE
                 </h1>
-                <p className="text-neutral-400 lg:w-[29rem] text-xl leading-8 md:w-[50vw] w-4/5">
+                <p className="text-neutral-400 text-xl leading-8 md:w-[50vw] w-4/5 lg:w-[29rem] ">
                     Let's face it; if you want to go to space, you might as well
                     genuinely go to outer space and not hover kind of on the
                     edge of it. Well sit back, and relax because we'll give you
