@@ -34,6 +34,13 @@ Links:
 
 - Live website: <https://xup60521.github.io/react-space-tourism-website/>
 
+```bash
+# install dependencies
+pnpm install
+# start dev server
+pnpm run dev
+```
+
 ## My process
 
 ### Built with
