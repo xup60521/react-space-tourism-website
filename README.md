@@ -1,89 +1,134 @@
-# Frontend Mentor - Space tourism website
+# Frontend Mentor Challenge - Space tourism multi-page website
 
-![Design preview for the Space tourism website coding challenge](./preview.jpg)
+This is a solution to the [Space tourism website challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/space-tourism-multipage-website-gRWj1URZ3 "https://www.frontendmentor.io/challenges/space-tourism-multipage-website-gRWj1URZ3").
 
-## Welcome! 👋
+## Table of contents
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects. Our challenges are perfect portfolio pieces, so please feel free to use what you create in your portfolio to show others.
+- [Overview](#overview)
 
-**To do this challenge, you need a strong understanding of HTML, CSS, and JavaScript.**
+- [My process](#my-process)
 
-## The challenge
+   - [Built with](#built-with)
 
-Your challenge is to build out this multi-page space tourism website and get it looking as close to the design as possible.
+   - [What I learned](#what-i-learned)
 
-**This project is a collaboration between us, Scrimba, and Kevin Powell. If you'd like to see how Kevin would tackle the project, you can [follow along on Scrimba's free course](https://scrimba.com/learn/spacetravel).**
+    - [react-router-dom & framer-motion](#react-router-dom--framer-motion)
 
-If you're working through it yourself, please use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
+- [Resources](#resources)
 
-If you choose to use a JS-heavy approach, we provide a local `data.json` file for the different page data. This means you'll be able to pull the data from there instead of using the separate `.html` files.
+- [Acknowledgments](#acknowledgments)
 
-Your users should be able to:
+## Overview
+
+Users should be able to:
 
 - View the optimal layout for each of the website's pages depending on their device's screen size
+
 - See hover states for all interactive elements on the page
+
 - View each page and be able to toggle between the tabs to see new information
 
-Want some support on the challenge? [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+Links:
 
-## Where to find everything
+- GitHub Repo: <https://github.com/xup60521/react-space-tourism-website>
 
-Your task is to build out the project to the design file provided. We provide both Sketch and Figma versions of the design, so you can choose which tool you prefer to use. You can download the design file on the platform. The design download comes with a `README.md` file as well to help you get set up.
+- Live website: <https://xup60521.github.io/react-space-tourism-website/>
 
-All the required assets for this project are in the `/assets` folder. The assets are already exported for the correct screen size and optimized. Some images are reusable at multiple screen sizes.
+## My process
 
-The design system in the design file will give you more information about the various colors, fonts, and styles used in this project.
+### Built with
 
-## Building your project
+- react (powered by vite)
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+- react-router-dom
 
-1. Separate the `starter-code` from the rest of this project and rename it to something meaningful for you. Initialize the codebase as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+- framer-motion
 
-## Deploying your project
+- tailwindCSS
 
-As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
+### What I learned
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+#### react-router-dom & framer-motion
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
+Though it is possible to do client side navigation with native built in hooks, react-router-dom makes it easier to do so.
 
-## Create a custom `README.md`
+Here, I use `<HashRouter>` to navigate between pages.
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+```tsx
+// basic setup
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { routes } from "./routes.ts"
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+export default function Root() {
+  return (
+    <HashRouter>
+      <App />
+    </HashRouter>
+  )
+}
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+function App() {
+  const location = useLocation()
+  return (
+    <Routes location={location} key={location.pathname}>
+      {route.map((item, index) => (
+          <Route path={`${item.path}/*`} element={item.element()} key={`top route ${item.path} ${index}`} />
+      ))}
+     </Routes>
+  )
+}
+```
 
-## Submitting your solution
+We can use `<Link>` to navigate different routes. But for now, there’s no transition animation between these pages.
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
+Luckily, there’s already a library that satisfies our need. Using `framer-motion`, we can create transition effect during navigation.
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+```tsx
+import { AnimatePresence } from "framer-motion";
 
-## Sharing your solution
+// App.tsx
 
-There are multiple places you can share your solution:
+<AnimatePresence>
+  <Routes location={location} key={location.pathname}>
+    {route.map((item, index) => (
+        <Route path={`${item.path}/*`} element={item.element()} key={`top route ${item.path} ${index}`} />
+    ))}
+   </Routes>
+</AnimatePresence>
+```
 
-1. Share your solution page in the **#finished-projects** channel of the [community](https://www.frontendmentor.io/community). 
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
+In the individual element, we need to adjust some code to create animation.
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback.
+```tsx
+// Crew.tsx
+import { motion } from "framer-motion"
+export default function Crew() {
+  return (
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: "100%" }}
+      exit={{ opacity: 0 }}
+    >
+      {/* ... */}
+     </motion.main>
+  )
+}
+```
 
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
+By doing so, we successfully create the transition animation between pages. When navigating to a different page, previews element would fade out, next element would fade in.
 
-## Got feedback for us?
+To be honest, it’s probably better to use a full-stack framework to build a multi-page website. Using either `Remix` or `Next.js` should be good as well.
 
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
+## Resources
 
-**Have fun building!** 🚀
+- TailwindCSS Docs - <https://tailwindcss.com/docs>
+
+- Google font - <https://fonts.google.com>
+
+- react-router-dom docs - <https://reactrouter.com/en/main>
+
+- framer-motion docs - <https://www.framer.com/motion/>
+
+## Acknowledgments
+
+- framer motion + react-router-dom tutorial - <https://www.youtube.com/watch?v=FdrEjwymzdY&t=655s>
